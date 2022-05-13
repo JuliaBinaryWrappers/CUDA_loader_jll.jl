@@ -1,6 +1,6 @@
 name = "CUDA_loader_jll"
 uuid = "46276fb2-733a-55e8-a436-109f48337aca"
-version = "0.2.1+4"
+version = "0.2.1+5"
 
 [deps]
 JLLWrappers = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"

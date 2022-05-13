@@ -3,6 +3,7 @@ export compute_sanitizer, libcublas, libcudadevrt, libcufft, libcupti, libcurand
 
 JLLWrappers.@generate_wrapper_header("CUDA_loader")
 JLLWrappers.@declare_library_product(libcublas, "cublas64_11.dll")
+JLLWrappers.@declare_file_product(libcudadevrt)
 JLLWrappers.@declare_library_product(libcufft, "cufft64_10.dll")
 JLLWrappers.@declare_library_product(libcupti, "cupti64_2021.3.1.dll")
 JLLWrappers.@declare_library_product(libcurand, "curand64_10.dll")
@@ -13,7 +14,6 @@ JLLWrappers.@declare_file_product(libdevice)
 JLLWrappers.@declare_library_product(libnvtoolsext, "nvToolsExt64_1.dll")
 JLLWrappers.@declare_library_product(libnvvm, "nvvm64_40_0.dll")
 JLLWrappers.@declare_executable_product(compute_sanitizer)
-JLLWrappers.@declare_file_product(libcudadevrt)
 JLLWrappers.@declare_executable_product(nvdisasm)
 JLLWrappers.@declare_executable_product(nvlink)
 JLLWrappers.@declare_executable_product(ptxas)
@@ -23,6 +23,11 @@ function __init__()
         libcublas,
         "bin\\cublas64_11.dll",
         RTLD_LAZY | RTLD_DEEPBIND,
+    )
+
+    JLLWrappers.@init_file_product(
+        libcudadevrt,
+        "lib\\cudadevrt.lib",
     )
 
     JLLWrappers.@init_library_product(
@@ -81,11 +86,6 @@ function __init__()
     JLLWrappers.@init_executable_product(
         compute_sanitizer,
         "bin\\compute-sanitizer.exe",
-    )
-
-    JLLWrappers.@init_file_product(
-        libcudadevrt,
-        "lib\\cudadevrt.lib",
     )
 
     JLLWrappers.@init_executable_product(
